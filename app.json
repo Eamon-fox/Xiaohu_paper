@@ -1,0 +1,33 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/archive/archive",
+    "pages/bookmarks/bookmarks",
+    "pages/detail/detail"
+  ],
+  "window": {
+    "navigationBarTitleText": "小狐Paper",
+    "navigationBarBackgroundColor": "#ffffff",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#999999",
+    "selectedColor": "#2196f3",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "今日"
+      },
+      {
+        "pagePath": "pages/archive/archive",
+        "text": "历史"
+      },
+      {
+        "pagePath": "pages/bookmarks/bookmarks",
+        "text": "收藏"
+      }
+    ]
+  },
+  "lazyCodeLoading": "requiredComponents"
+}

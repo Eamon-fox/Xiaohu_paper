@@ -1,0 +1,38 @@
+<view class="container">
+  <view class="header">
+    <text class="title">历史日报</text>
+    <view class="trigger-btn {{pipelineRunning ? 'running' : ''}}" bindtap="onTrigger">
+      <text wx:if="{{pipelineRunning}}">运行中</text>
+      <text wx:else>生成日报</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">加载中...</view>
+
+  <view wx:else class="list">
+    <view wx:if="{{pipelineRunning}}" class="date-item generating">
+      <view class="date-info">
+        <text class="date">生成中...</text>
+        <text class="time">{{pipelineStep}}</text>
+      </view>
+    </view>
+    <view
+      wx:for="{{dates}}"
+      wx:key="index"
+      class="date-item"
+      bindtap="onTapDate"
+      data-date="{{item.date}}"
+      data-version="{{item.version}}"
+    >
+      <view class="date-info">
+        <text class="date">{{item.date}}</text>
+        <text class="time">{{item.time}}</text>
+      </view>
+      <text class="count">{{item.article_count}} 篇</text>
+    </view>
+
+    <view wx:if="{{dates.length === 0}}" class="empty">
+      暂无历史日报
+    </view>
+  </view>
+</view>

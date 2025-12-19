@@ -1,0 +1,142 @@
+.container {
+  padding: 24rpx;
+  background: #fff;
+  min-height: 100vh;
+}
+
+.header {
+  padding: 8rpx 0 16rpx;
+}
+
+.date {
+  font-size: 26rpx;
+  color: #999;
+}
+
+.list {
+  margin-top: 8rpx;
+}
+
+.card {
+  background: #fff;
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.card.vip {
+  border-left: 3rpx solid #ff9800;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.source {
+  font-size: 24rpx;
+  color: #666;
+}
+
+.score {
+  font-size: 22rpx;
+  color: #52c41a;
+}
+
+.card-title {
+  font-size: 30rpx;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.5;
+  display: block;
+  margin-bottom: 12rpx;
+}
+
+.card-summary {
+  font-size: 26rpx;
+  color: #888;
+  line-height: 1.6;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.vip-tag {
+  display: inline-block;
+  font-size: 20rpx;
+  color: #ff9800;
+  padding: 4rpx 12rpx;
+  border: 1rpx solid #ff9800;
+  border-radius: 4rpx;
+  margin-top: 12rpx;
+}
+
+/* 骨架屏样式 */
+.skeleton-list {
+  margin-top: 8rpx;
+}
+
+.skeleton-card {
+  background: #fff;
+  border: 1rpx solid #eee;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  margin-bottom: 16rpx;
+}
+
+.skeleton-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16rpx;
+}
+
+.skeleton-source {
+  width: 120rpx;
+  height: 24rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4rpx;
+}
+
+.skeleton-score {
+  width: 80rpx;
+  height: 24rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4rpx;
+}
+
+.skeleton-title {
+  width: 100%;
+  height: 32rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4rpx;
+  margin-bottom: 16rpx;
+}
+
+.skeleton-summary {
+  width: 100%;
+  height: 24rpx;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4rpx;
+  margin-bottom: 12rpx;
+}
+
+.skeleton-summary.short {
+  width: 70%;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

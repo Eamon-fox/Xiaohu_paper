@@ -1,0 +1,105 @@
+.container {
+  padding: 32rpx 24rpx;
+  background: #fff;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: 34rpx;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #333;
+}
+
+.meta {
+  margin-top: 16rpx;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.source {
+  color: #666;
+  margin-right: 16rpx;
+}
+
+.authors {
+  margin-top: 12rpx;
+  font-size: 24rpx;
+  color: #888;
+}
+
+.summary-box {
+  margin-top: 32rpx;
+  padding: 24rpx;
+  border: 1rpx solid #eee;
+  border-radius: 8rpx;
+}
+
+.summary-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.label {
+  font-size: 24rpx;
+  color: #999;
+}
+
+.toggle-btn {
+  font-size: 22rpx;
+  color: #2196f3;
+  padding: 4rpx 12rpx;
+  border: 1rpx solid #2196f3;
+  border-radius: 4rpx;
+}
+
+.summary {
+  font-size: 28rpx;
+  color: #333;
+  line-height: 1.8;
+}
+
+.action-btns {
+  margin-top: 32rpx;
+  display: flex;
+  gap: 24rpx;
+}
+
+.link-btn {
+  flex: 1;
+  background: #fff;
+  color: #333;
+  border: 1rpx solid #ddd;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  margin: 0;
+}
+
+.link-btn::after {
+  border: none;
+}
+
+.bookmark-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8rpx;
+  padding: 16rpx 0;
+  background: #fff;
+  color: #333;
+  border: 1rpx solid #ddd;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+}
+
+.bookmark-btn.bookmarked {
+  border-color: #ff9800;
+  color: #ff9800;
+}
+
+.bookmark-icon {
+  font-size: 32rpx;
+}

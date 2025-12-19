@@ -1,0 +1,37 @@
+<view class="container">
+    <view class="header">
+      <text class="date">{{date}}</text>
+    </view>
+
+    <view wx:if="{{loading}}" class="skeleton-list">
+    <view class="skeleton-card" wx:for="{{[1,2,3]}}" wx:key="*this">
+      <view class="skeleton-header">
+        <view class="skeleton-source"></view>
+        <view class="skeleton-score"></view>
+      </view>
+      <view class="skeleton-title"></view>
+      <view class="skeleton-summary"></view>
+      <view class="skeleton-summary short"></view>
+    </view>
+  </view>
+
+    <view wx:else class="list">
+      <view 
+        wx:for="{{articles}}" 
+        wx:key="id" 
+        class="card {{item.is_vip ? 'vip' : ''}}"
+        bindtap="onTapArticle"
+        data-id="{{item.id}}"
+      >
+        <view class="card-header">
+          <text class="source">{{item.journal}}</text>
+          <text class="score">{{item.scoreDisplay}}%</text>
+        </view>
+        <text class="card-title">{{item.title}}</text>
+        <text class="card-summary">{{item.summary}}</text>
+        <view wx:if="{{item.is_vip}}" class="vip-tag">
+          {{item.vip_keywords[0]}}
+        </view>
+      </view>
+    </view>
+  </view>

@@ -1,0 +1,28 @@
+<view class="container" wx:if="{{article}}">
+    <text class="title">{{article.title}}</text>
+
+    <view class="meta">
+      <text class="source">{{article.journal}}</text>
+      <text class="date">{{article.published_at}}</text>
+    </view>
+
+    <view class="authors" wx:if="{{article.authors.length}}">
+      <text>{{article.authors.join(', ')}}</text>
+    </view>
+
+    <view class="summary-box">
+      <view class="summary-header">
+        <text class="label">{{showOriginal ? '原始摘要' : 'AI 摘要'}}</text>
+        <text class="toggle-btn" bindtap="onToggleSummary">{{showOriginal ? 'AI摘要' : '原文'}}</text>
+      </view>
+      <text class="summary">{{showOriginal ? article.content : article.summary}}</text>
+    </view>
+
+    <view class="action-btns">
+      <button class="link-btn" bindtap="onTapLink">复制原文链接</button>
+      <view class="bookmark-btn {{isBookmarked ? 'bookmarked' : ''}}" bindtap="toggleBookmark">
+        <text class="bookmark-icon">{{isBookmarked ? '★' : '☆'}}</text>
+        <text>{{isBookmarked ? '已收藏' : '收藏'}}</text>
+      </view>
+    </view>
+  </view>
