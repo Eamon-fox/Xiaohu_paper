@@ -1,84 +1,164 @@
+/* ========== 详情页样式 ========== */
+
+/* 加载状态 */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f8fafc;
+}
+
+.loading-container text {
+  color: #6b7280;
+  font-size: 28rpx;
+}
+
+/* 主容器 */
 .container {
-  padding: 32rpx 24rpx;
-  background: #fff;
   min-height: 100vh;
+  background: #f8fafc;
+  padding: 24rpx;
+}
+
+.container.has-nav {
+  padding-bottom: calc(140rpx + env(safe-area-inset-bottom));
+}
+
+/* ========== 文章头部 ========== */
+.article-header {
+  background: #ffffff;
+  border-radius: 20rpx;
+  padding: 28rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .title {
-  font-size: 34rpx;
-  font-weight: 600;
+  font-size: 36rpx;
+  font-weight: 700;
   line-height: 1.5;
-  color: #333;
+  color: #1f2937;
+  margin-bottom: 20rpx;
 }
 
 .meta {
-  margin-top: 16rpx;
-  font-size: 24rpx;
-  color: #999;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12rpx;
 }
 
 .source {
-  color: #666;
-  margin-right: 16rpx;
+  font-size: 24rpx;
+  color: #3b82f6;
+  background: #eff6ff;
+  padding: 6rpx 14rpx;
+  border-radius: 8rpx;
+  font-weight: 500;
+}
+
+.date {
+  font-size: 24rpx;
+  color: #9ca3af;
 }
 
 .authors {
+  width: 100%;
   margin-top: 12rpx;
   font-size: 24rpx;
-  color: #888;
+  color: #6b7280;
+  line-height: 1.6;
 }
 
+/* ========== 摘要卡片 ========== */
 .summary-box {
-  margin-top: 32rpx;
+  background: #ffffff;
+  border-radius: 20rpx;
   padding: 24rpx;
-  border: 1rpx solid #eee;
-  border-radius: 8rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 12rpx rgba(0, 0, 0, 0.04);
 }
 
 .summary-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #f1f5f9;
 }
 
 .label {
-  font-size: 24rpx;
-  color: #999;
+  display: flex;
+  align-items: center;
+  font-size: 26rpx;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.label::before {
+  content: "";
+  display: inline-block;
+  width: 6rpx;
+  height: 24rpx;
+  background: #3b82f6;
+  border-radius: 3rpx;
+  margin-right: 12rpx;
 }
 
 .toggle-btn {
-  font-size: 22rpx;
-  color: #2196f3;
-  padding: 4rpx 12rpx;
-  border: 1rpx solid #2196f3;
-  border-radius: 4rpx;
+  font-size: 24rpx;
+  color: #3b82f6;
+  padding: 8rpx 16rpx;
+  background: #eff6ff;
+  border-radius: 8rpx;
+  font-weight: 500;
+}
+
+.toggle-btn:active {
+  background: #dbeafe;
 }
 
 .summary {
   font-size: 28rpx;
-  color: #333;
-  line-height: 1.8;
+  color: #374151;
+  line-height: 1.9;
+  text-align: justify;
 }
 
+/* ========== 操作按钮 ========== */
 .action-btns {
-  margin-top: 32rpx;
   display: flex;
-  gap: 24rpx;
+  gap: 16rpx;
+  margin-bottom: 20rpx;
 }
 
 .link-btn {
   flex: 1;
-  background: #fff;
-  color: #333;
-  border: 1rpx solid #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 88rpx;
+  background: #ffffff;
+  color: #374151;
+  border: 2rpx solid #e5e7eb;
   font-size: 28rpx;
-  border-radius: 8rpx;
-  margin: 0;
+  border-radius: 16rpx;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
-.link-btn::after {
-  border: none;
+.link-btn::before {
+  content: "🔗";
+  font-size: 28rpx;
+  margin-right: 8rpx;
+}
+
+.link-btn:active {
+  background: #f8fafc;
+  transform: scale(0.98);
 }
 
 .bookmark-btn {
@@ -87,19 +167,74 @@
   align-items: center;
   justify-content: center;
   gap: 8rpx;
-  padding: 16rpx 0;
-  background: #fff;
-  color: #333;
-  border: 1rpx solid #ddd;
+  height: 88rpx;
+  background: #ffffff;
+  color: #374151;
+  border: 2rpx solid #e5e7eb;
   font-size: 28rpx;
-  border-radius: 8rpx;
+  border-radius: 16rpx;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.bookmark-btn:active {
+  transform: scale(0.98);
 }
 
 .bookmark-btn.bookmarked {
-  border-color: #ff9800;
-  color: #ff9800;
+  background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+  border-color: #fcd34d;
+  color: #b45309;
 }
 
 .bookmark-icon {
   font-size: 32rpx;
+}
+
+/* ========== 底部导航栏 ========== */
+.nav-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: #ffffff;
+  border-top: 1rpx solid #e5e7eb;
+  padding: 16rpx 24rpx;
+  padding-bottom: calc(16rpx + env(safe-area-inset-bottom));
+  box-shadow: 0 -4rpx 16rpx rgba(0, 0, 0, 0.04);
+}
+
+.nav-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20rpx;
+  color: #3b82f6;
+  font-size: 28rpx;
+  font-weight: 500;
+  border-radius: 12rpx;
+  transition: all 0.2s ease;
+}
+
+.nav-btn:first-child {
+  margin-right: 8rpx;
+}
+
+.nav-btn:last-child {
+  margin-left: 8rpx;
+}
+
+.nav-btn:active {
+  background: #eff6ff;
+}
+
+.nav-btn.disabled {
+  color: #d1d5db;
+  pointer-events: none;
+}
+
+.nav-btn.disabled:active {
+  background: transparent;
 }

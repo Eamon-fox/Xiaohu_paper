@@ -27,6 +27,8 @@ App({
   globalData: {
     userInfo: null,
     pendingDate: null,
-    pendingVersion: null
+    pendingVersion: null,
+    currentArticles: [],
+    shouldRefreshDaily: false
   }
 })

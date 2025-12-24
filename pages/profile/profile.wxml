@@ -1,0 +1,250 @@
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="loading-container">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <block wx:else>
+    <!-- 用户信息卡片 -->
+    <view class="user-card">
+      <view class="user-avatar">
+        <text class="avatar-icon">🦊</text>
+      </view>
+      <view class="user-stats">
+        <view class="stat-item clickable" bindtap="goToBookmarks">
+          <text class="stat-value">{{userInfo.bookmark_count || 0}}</text>
+          <text class="stat-label">收藏 ›</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{userInfo.login_count || 0}}</text>
+          <text class="stat-label">登录</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- VIP 关键词 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="title-icon">⭐</text>
+          <text>VIP 关键词</text>
+          <view class="help-btn" bindtap="onShowVipHelp">
+            <text class="help-icon">?</text>
+          </view>
+        </view>
+        <text class="section-desc">命中时文章将高亮显示并获得分数加成</text>
+      </view>
+
+      <view class="card">
+        <!-- Tier 1 -->
+        <view class="keyword-group">
+          <view class="keyword-header">
+            <text class="label-text">Tier 1</text>
+            <text class="label-badge tier1">+50%</text>
+            <view class="add-keyword-btn" bindtap="onAddTier1">
+              <text>+</text>
+            </view>
+          </view>
+          <view class="keyword-tags">
+            <view wx:if="{{tier1List.length === 0}}" class="empty-keywords">
+              <text>点击 + 添加关键词</text>
+            </view>
+            <view wx:for="{{tier1List}}" wx:key="index" class="keyword-tag tier1">
+              <text class="keyword-text" bindtap="onEditTier" data-tier="tier1" data-index="{{index}}">{{item}}</text>
+              <text class="keyword-delete" bindtap="onDeleteTier" data-tier="tier1" data-index="{{index}}">×</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- Tier 2 -->
+        <view class="keyword-group">
+          <view class="keyword-header">
+            <text class="label-text">Tier 2</text>
+            <text class="label-badge tier2">+30%</text>
+            <view class="add-keyword-btn" bindtap="onAddTier2">
+              <text>+</text>
+            </view>
+          </view>
+          <view class="keyword-tags">
+            <view wx:if="{{tier2List.length === 0}}" class="empty-keywords">
+              <text>点击 + 添加关键词</text>
+            </view>
+            <view wx:for="{{tier2List}}" wx:key="index" class="keyword-tag tier2">
+              <text class="keyword-text" bindtap="onEditTier" data-tier="tier2" data-index="{{index}}">{{item}}</text>
+              <text class="keyword-delete" bindtap="onDeleteTier" data-tier="tier2" data-index="{{index}}">×</text>
+            </view>
+          </view>
+        </view>
+
+        <!-- Tier 3 -->
+        <view class="keyword-group last">
+          <view class="keyword-header">
+            <text class="label-text">Tier 3</text>
+            <text class="label-badge tier3">+15%</text>
+            <view class="add-keyword-btn" bindtap="onAddTier3">
+              <text>+</text>
+            </view>
+          </view>
+          <view class="keyword-tags">
+            <view wx:if="{{tier3List.length === 0}}" class="empty-keywords">
+              <text>点击 + 添加关键词</text>
+            </view>
+            <view wx:for="{{tier3List}}" wx:key="index" class="keyword-tag tier3">
+              <text class="keyword-text" bindtap="onEditTier" data-tier="tier3" data-index="{{index}}">{{item}}</text>
+              <text class="keyword-delete" bindtap="onDeleteTier" data-tier="tier3" data-index="{{index}}">×</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 研究兴趣 -->
+    <view class="section">
+      <view class="section-header">
+        <view class="section-title">
+          <text class="title-icon">🎯</text>
+          <text>研究兴趣</text>
+          <view class="help-btn" bindtap="onShowAnchorHelp">
+            <text class="help-icon">?</text>
+          </view>
+        </view>
+        <text class="section-desc">系统将根据你的研究兴趣个性化推荐文章</text>
+      </view>
+
+      <!-- 正向锚点 -->
+      <view class="card anchor-card positive">
+        <view class="anchor-header">
+          <view class="anchor-title">
+            <text class="anchor-icon">👍</text>
+            <text>感兴趣的方向</text>
+            <text class="anchor-count">{{positiveList.length}}/10</text>
+          </view>
+          <view class="add-btn {{positiveList.length >= 10 ? 'disabled' : ''}}" bindtap="onAddPositive">
+            <text>+ 添加</text>
+          </view>
+        </view>
+
+        <view wx:if="{{positiveList.length === 0}}" class="empty-hint">
+          <text>暂无，点击添加或收藏文章时选择"收藏并学习"</text>
+        </view>
+
+        <view wx:for="{{positiveList}}" wx:key="index" class="anchor-item">
+          <view class="anchor-content" bindtap="onEditPositive" data-index="{{index}}">
+            <text class="anchor-text">{{item}}</text>
+          </view>
+          <view class="anchor-actions">
+            <view class="action-btn edit" bindtap="onEditPositive" data-index="{{index}}">
+              <text>编辑</text>
+            </view>
+            <view class="action-btn delete" bindtap="onDeletePositive" data-index="{{index}}">
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 负向锚点 -->
+      <view class="card anchor-card negative">
+        <view class="anchor-header">
+          <view class="anchor-title">
+            <text class="anchor-icon">👎</text>
+            <text>不感兴趣的方向</text>
+            <text class="anchor-count">{{negativeList.length}}/10</text>
+          </view>
+          <view class="add-btn {{negativeList.length >= 10 ? 'disabled' : ''}}" bindtap="onAddNegative">
+            <text>+ 添加</text>
+          </view>
+        </view>
+
+        <view wx:if="{{negativeList.length === 0}}" class="empty-hint">
+          <text>暂无，添加后这些方向的文章会降低排名</text>
+        </view>
+
+        <view wx:for="{{negativeList}}" wx:key="index" class="anchor-item negative-item">
+          <view class="anchor-content" bindtap="onEditNegative" data-index="{{index}}">
+            <text class="anchor-text">{{item}}</text>
+          </view>
+          <view class="anchor-actions">
+            <view class="action-btn edit" bindtap="onEditNegative" data-index="{{index}}">
+              <text>编辑</text>
+            </view>
+            <view class="action-btn delete" bindtap="onDeleteNegative" data-index="{{index}}">
+              <text>删除</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 提示信息 -->
+    <view class="tip-card">
+      <text class="tip-icon">💡</text>
+      <text class="tip-text">收藏文章时选择"收藏并学习"，系统会自动将文章摘要添加到感兴趣的方向</text>
+    </view>
+
+    <!-- 操作按钮 -->
+    <view class="actions">
+      <button class="save-btn {{saving ? 'disabled' : ''}}"
+              bindtap="onSave"
+              disabled="{{saving}}">
+        <text wx:if="{{!saving}}">保存配置</text>
+        <text wx:else>保存中...</text>
+      </button>
+      <view class="secondary-actions">
+        <button class="secondary-btn" bindtap="onReset">
+          <text>恢复默认</text>
+        </button>
+        <button class="secondary-btn danger" bindtap="onClearReadHistory">
+          <text>清空已读</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 内测提示 -->
+    <view class="beta-notice">
+      <text class="beta-tag">内测</text>
+      <text class="beta-text">当前为内测版本，历史日报、收藏、配置等数据可能随时被清空</text>
+    </view>
+
+    <!-- 底部安全区 -->
+    <view class="safe-bottom"></view>
+  </block>
+
+  <!-- 编辑弹窗 -->
+  <view wx:if="{{showEditModal}}" class="modal-mask" bindtap="onCloseModal">
+    <view class="modal-content" catchtap="preventBubble">
+      <view class="modal-header">
+        <text class="modal-title">{{editModalTitle}}</text>
+        <view class="modal-close" bindtap="onCloseModal">×</view>
+      </view>
+      <view class="modal-body">
+        <textarea class="modal-textarea"
+                  placeholder="{{editModalPlaceholder}}"
+                  value="{{editValue}}"
+                  bindinput="onEditValueChange"
+                  auto-height
+                  maxlength="2000"
+                  focus="{{showEditModal}}"/>
+      </view>
+      <view class="modal-footer">
+        <button class="modal-btn cancel" bindtap="onCloseModal">取消</button>
+        <button class="modal-btn confirm" bindtap="onConfirmEdit">确定</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 帮助弹窗 -->
+  <view wx:if="{{showHelpModal}}" class="modal-mask" bindtap="onCloseHelp">
+    <view class="help-modal" catchtap="preventBubble">
+      <view class="help-header">
+        <text class="help-title">{{helpTitle}}</text>
+        <view class="modal-close" bindtap="onCloseHelp">×</view>
+      </view>
+      <view class="help-body">
+        <rich-text nodes="{{helpContent}}"></rich-text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,4 +1,5 @@
 const { getBookmarks, removeBookmark, clearBookmarksCache } = require('../../utils/bookmark')
+const app = getApp()
 
 Page({
   data: {
@@ -31,6 +32,7 @@ Page({
 
   onTapArticle(e) {
     const id = e.currentTarget.dataset.id
+    app.globalData.currentArticles = this.data.bookmarks.map(a => a.article_id)
     wx.navigateTo({ url: `/pages/detail/detail?id=${id}` })
   },
 

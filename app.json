@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/archive/archive",
     "pages/bookmarks/bookmarks",
+    "pages/profile/profile",
     "pages/detail/detail"
   ],
   "window": {
@@ -26,6 +27,10 @@
       {
         "pagePath": "pages/bookmarks/bookmarks",
         "text": "收藏"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的"
       }
     ]
   },

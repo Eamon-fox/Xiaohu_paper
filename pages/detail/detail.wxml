@@ -1,28 +1,45 @@
-<view class="container" wx:if="{{article}}">
-    <text class="title">{{article.title}}</text>
+<view class="loading-container" wx:if="{{loading}}">
+  <text>加载中...</text>
+</view>
 
+<view class="container {{showNav ? 'has-nav' : ''}}" wx:if="{{article && !loading}}">
+  <!-- 文章头部信息 -->
+  <view class="article-header">
+    <text class="title">{{article.title}}</text>
     <view class="meta">
       <text class="source">{{article.journal}}</text>
       <text class="date">{{article.published_at}}</text>
     </view>
-
     <view class="authors" wx:if="{{article.authors.length}}">
       <text>{{article.authors.join(', ')}}</text>
     </view>
+  </view>
 
-    <view class="summary-box">
-      <view class="summary-header">
-        <text class="label">{{showOriginal ? '原始摘要' : 'AI 摘要'}}</text>
-        <text class="toggle-btn" bindtap="onToggleSummary">{{showOriginal ? 'AI摘要' : '原文'}}</text>
-      </view>
-      <text class="summary">{{showOriginal ? article.content : article.summary}}</text>
+  <!-- 摘要内容 -->
+  <view class="summary-box">
+    <view class="summary-header">
+      <text class="label">{{showOriginal ? '原始摘要' : 'AI 摘要'}}</text>
+      <text class="toggle-btn" bindtap="onToggleSummary">{{showOriginal ? '查看AI摘要' : '查看原文'}}</text>
     </view>
+    <text class="summary">{{showOriginal ? article.content : article.summary}}</text>
+  </view>
 
-    <view class="action-btns">
-      <button class="link-btn" bindtap="onTapLink">复制原文链接</button>
-      <view class="bookmark-btn {{isBookmarked ? 'bookmarked' : ''}}" bindtap="toggleBookmark">
-        <text class="bookmark-icon">{{isBookmarked ? '★' : '☆'}}</text>
-        <text>{{isBookmarked ? '已收藏' : '收藏'}}</text>
-      </view>
+  <!-- 操作按钮 -->
+  <view class="action-btns">
+    <button class="link-btn" bindtap="onTapLink">复制原文链接</button>
+    <view class="bookmark-btn {{isBookmarked ? 'bookmarked' : ''}}" bindtap="toggleBookmark">
+      <text class="bookmark-icon">{{isBookmarked ? '★' : '☆'}}</text>
+      <text>{{isBookmarked ? '已收藏' : '收藏'}}</text>
     </view>
   </view>
+</view>
+
+<!-- 底部导航 -->
+<view class="nav-bar" wx:if="{{showNav}}">
+  <view class="nav-btn {{!hasPrev ? 'disabled' : ''}}" bindtap="goPrev">
+    <text>‹ 上一篇</text>
+  </view>
+  <view class="nav-btn {{!hasNext ? 'disabled' : ''}}" bindtap="goNext">
+    <text>下一篇 ›</text>
+  </view>
+</view>

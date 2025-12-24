@@ -24,10 +24,13 @@ async function getBookmarks(useCache = false) {
 }
 
 // 添加收藏
-async function addBookmark(articleId) {
+// articleInfo: { title, journal, date, note }
+async function addBookmark(articleId, articleInfo = {}) {
   const res = await authRequest({
     url: `/api/bookmarks/${articleId}`,
-    method: 'POST'
+    method: 'POST',
+    data: articleInfo,
+    header: { 'Content-Type': 'application/json' }
   })
   // 清除缓存
   wx.removeStorageSync(CACHE_KEY)

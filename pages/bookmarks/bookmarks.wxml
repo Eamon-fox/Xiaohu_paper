@@ -1,4 +1,9 @@
 <view class="container">
+  <view class="header">
+    <text class="title">我的收藏</text>
+    <text class="beta-tag">内测</text>
+  </view>
+
   <view class="loading" wx:if="{{loading}}">
     <text>加载中...</text>
   </view>
@@ -10,16 +15,15 @@
   </view>
 
   <view class="bookmark-list" wx:else>
-    <view class="bookmark-item" wx:for="{{bookmarks}}" wx:key="article_id">
-      <view class="bookmark-content" bindtap="onTapArticle" data-id="{{item.article_id}}">
-        <text class="bookmark-title">{{item.title}}</text>
-        <view class="bookmark-meta">
-          <text class="bookmark-source">{{item.journal || item.source}}</text>
-          <text class="bookmark-date">收藏于 {{item.saved_at}}</text>
-        </view>
+    <view class="bookmark-item" wx:for="{{bookmarks}}" wx:key="article_id"
+          bindtap="onTapArticle" data-id="{{item.article_id}}">
+      <text class="bookmark-title">{{item.title}}</text>
+      <view class="bookmark-meta">
+        <text class="bookmark-source">{{item.journal || item.source}}</text>
+        <text class="bookmark-date">收藏于 {{item.saved_at}}</text>
       </view>
       <view class="bookmark-remove" catchtap="onRemoveBookmark" data-id="{{item.article_id}}" data-index="{{index}}">
-        <text>删除</text>
+        <text>×</text>
       </view>
     </view>
   </view>

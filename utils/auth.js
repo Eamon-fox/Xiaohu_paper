@@ -47,10 +47,10 @@ function clearToken() {
 }
 
 // 带认证的请求封装
-function authRequest(options) {
-  return new Promise(async (resolve, reject) => {
-    const token = await getToken()
+async function authRequest(options) {
+  const token = await getToken()
 
+  return new Promise((resolve, reject) => {
     wx.request({
       url: BASE_URL + options.url,
       method: options.method || 'GET',
@@ -59,13 +59,11 @@ function authRequest(options) {
         ...options.header,
         'Authorization': `Bearer ${token}`
       },
-      success: async (res) => {
+      success: (res) => {
         // Token 过期，重新登录后重试
         if (res.statusCode === 401) {
           clearToken()
-          try {
-            await login()
-            // 重试请求
+          login().then(() => {
             const newToken = wx.getStorageSync('token')
             wx.request({
               url: BASE_URL + options.url,
@@ -78,9 +76,7 @@ function authRequest(options) {
               success: (retryRes) => resolve(retryRes),
               fail: (err) => reject(err)
             })
-          } catch (err) {
-            reject(err)
-          }
+          }).catch(reject)
         } else {
           resolve(res)
         }
