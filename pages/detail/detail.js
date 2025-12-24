@@ -113,18 +113,18 @@ Page({
       })
 
       if (learnPreference && article.content) {
-        // 将文章内容添加到正向语义锚点
+        // 将文章内容添加到核心方向(tier1)语义锚点
         try {
           const config = await getConfig()
-          const currentAnchors = config.semantic_anchors?.positive || []
-          // 避免重复添加，且限制最多10条
+          const currentAnchors = config.semantic_anchors?.tier1 || []
+          // 避免重复添加，且限制最多5条
           if (currentAnchors.includes(article.content)) {
             wx.showToast({ title: '已收藏', icon: 'success' })
-          } else if (currentAnchors.length >= 10) {
+          } else if (currentAnchors.length >= 5) {
             wx.showToast({ title: '已收藏（锚点已满）', icon: 'none' })
           } else {
             await updateSemanticAnchors({
-              positive: [...currentAnchors, article.content]
+              tier1: [...currentAnchors, article.content]
             })
             wx.showToast({ title: '已收藏并学习', icon: 'success' })
           }
@@ -156,10 +156,20 @@ Page({
       if (removeFromAnchor && article.content) {
         try {
           const config = await getConfig()
-          const currentAnchors = config.semantic_anchors?.positive || []
-          const newAnchors = currentAnchors.filter(a => a !== article.content)
-          if (newAnchors.length !== currentAnchors.length) {
-            await updateSemanticAnchors({ positive: newAnchors })
+          const anchors = config.semantic_anchors || {}
+          // 检查所有正向层级，移除匹配的内容
+          const updates = {}
+          let removed = false
+          for (const tier of ['tier1', 'tier2', 'tier3']) {
+            const currentList = anchors[tier] || []
+            const newList = currentList.filter(a => a !== article.content)
+            if (newList.length !== currentList.length) {
+              updates[tier] = newList
+              removed = true
+            }
+          }
+          if (removed) {
+            await updateSemanticAnchors(updates)
             wx.showToast({ title: '已取消并移除偏好', icon: 'none' })
           } else {
             wx.showToast({ title: '已取消收藏', icon: 'none' })
